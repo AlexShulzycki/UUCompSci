@@ -35,12 +35,5 @@ def RungeKutta(functions, h, x0, y0, x):
 
     return results
 
-def RungeKuttaMultiple(functions):
-    results = []
-    for function in functions:
-        results.append(RungeKutta(function[0], function[1], function[2], function[3], function[4]))
-
-    return results
-
 
 
