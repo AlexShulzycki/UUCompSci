@@ -23,6 +23,7 @@ def RungeKutta(functions, h, x0, y0, x):
             y0 += ((1 / 6) * (F1 + 2 * F2 + 2 * F3 + F4))
 
             values.append([x0, y0])
+
             # Increment x for next iteration
             x0 += h
 
@@ -36,4 +37,26 @@ def RungeKutta(functions, h, x0, y0, x):
     return results
 
 
+M1 = 5.972 × 10**24 #kg
+M2 = 1.989 * 10**30 #kg
+distance = 151.87 * 10 ** 9 #m
 
+distance_earth_barycenter = distance * M2 / (M1 + M2)
+distance_sun_barycenter = distance * M1 / (M1 + M2)
+
+x0_earth = -distance_earth_barycenter
+x0_sun = distance_sun_barycenter
+
+s = 1 + M1/M2
+
+def velocity_e(x,t):
+    return (x / t)
+
+def velocity_s(y,t):
+    return (y / t)
+
+def acceleration_e(x,y):
+    return (-1*G * M2) * ( x*s ) / ( sqrt ( x**2 * s**2 + t**2 * s**2 ) )**3
+
+def acceleration_s(x,y):
+    return (-1 * G * M2) * (y * s) / ( sqrt ( x**2 * s**2 + t**2 * s**2))**3
