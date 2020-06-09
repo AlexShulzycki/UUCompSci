@@ -1,2 +1,2 @@
 print("Hello World")
-print("just checking if this is using the right git account now")
+print("just checking if this is using the right git account")
