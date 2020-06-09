@@ -37,26 +37,3 @@ def RungeKutta(functions, h, x0, y0, x):
     return results
 
 
-M1 = 5.972 × 10**24 #kg
-M2 = 1.989 * 10**30 #kg
-distance = 151.87 * 10 ** 9 #m
-
-distance_earth_barycenter = distance * M2 / (M1 + M2)
-distance_sun_barycenter = distance * M1 / (M1 + M2)
-
-x0_earth = -distance_earth_barycenter
-x0_sun = distance_sun_barycenter
-
-s = 1 + M1/M2
-
-def position_e(x,t):
-    return (x / t)
-
-def position_s(y,t):
-    return (y / t)
-
-def velocity_e(x,y):
-    return (-1*G * M2) * ( x * s ) / ( sqrt ( x**2 * s**2 + y**2 * s**2 ) )**3
-
-def velocity_s(x,y):
-    return (-1 * G * M2) * (y * s) / ( sqrt ( x**2 * s**2 + y**2 * s**2 ) )**3
