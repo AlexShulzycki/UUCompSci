@@ -19,4 +19,9 @@ class Test(TestCase):
     def testRungeKuttaBasic(self):
         def f(x , y):
             return (5 * x**2 - y)/(numpy.e**(x+y))
-        assert str(RungeKutta.RungeKutta(f, 0.1, 0, 1))[0:6] == "0.9655"
+        assert str(RungeKutta.RungeKutta(f, 0.1, 1, 0, 5))[0:6] == "2.1526"
+
+
+
+
+
