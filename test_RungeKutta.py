@@ -12,8 +12,8 @@ class Test(TestCase):
 
         def g(x, y):
             return ((x + y) / 2)
-
-        assert str(RungeKutta.RungeKutta(f, 0.1, 1, 0, 5))[0:6] == "2.1526"
-        assert str(RungeKutta.RungeKutta(f, 0.1, 0, 1, 0.1))[0:6] == "0.9655"
-        assert str(RungeKutta.RungeKutta(f, 0.1, 0, 1, 0.2))[0:6] == "0.9377"
+        functions = [f]
+        assert str(RungeKutta.RungeKutta(functions, 0.1, 1, 0, 5)[0])[0:6] == "2.1526"
+        assert str(RungeKutta.RungeKutta(functions, 0.1, 0, 1, 0.1)[0])[0:6] == "0.9655"
+        assert str(RungeKutta.RungeKutta(functions, 0.1, 0, 1, 0.2)[0])[0:6] == "0.9377"
 
