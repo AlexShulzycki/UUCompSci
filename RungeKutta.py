@@ -49,14 +49,14 @@ x0_sun = distance_sun_barycenter
 
 s = 1 + M1/M2
 
-def velocity_e(x,t):
+def position_e(x,t):
     return (x / t)
 
-def velocity_s(y,t):
+def position_s(y,t):
     return (y / t)
 
-def acceleration_e(x,y):
+def velocity_e(x,y):
     return (-1*G * M2) * ( x * s ) / ( sqrt ( x**2 * s**2 + y**2 * s**2 ) )**3
 
-def acceleration_s(x,y):
+def velocity_s(x,y):
     return (-1 * G * M2) * (y * s) / ( sqrt ( x**2 * s**2 + y**2 * s**2 ) )**3
