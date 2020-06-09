@@ -1,10 +1,16 @@
+import numpy as np
+
 # Function f, and step h, at starting position x0 and y0, up until x. Answer is at position (x, y(x)).
 def RungeKutta(functions, h, x0, y0, x):
 
+
     # Amount of steps needed
     n = int((x - x0) / h)
+
     results = []
+
     for f in functions:
+        values = []
         for i in range(0, n):
 
             F1 = h * f(x0, y0)
@@ -16,7 +22,13 @@ def RungeKutta(functions, h, x0, y0, x):
             # y(x + h) = y(x) + 1/6 (F1 + 2F2 +2F3 +F4)
             y0 += ((1 / 6) * (F1 + 2 * F2 + 2 * F3 + F4))
 
+            values.append([x0, y0])
+
+        values_array = np.array(values)
+        # PLOT results here so you get one plot per function
+
         results.append(y0)
+
     return results
 
 def RungeKuttaMultiple(functions):
@@ -25,3 +37,6 @@ def RungeKuttaMultiple(functions):
         results.append(RungeKutta(function[0], function[1], function[2], function[3], function[4]))
 
     return results
+
+
+
