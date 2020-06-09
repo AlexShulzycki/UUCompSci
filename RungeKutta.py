@@ -3,11 +3,10 @@ def RungeKuttaTest(value):
     print("Placeholder for now to demonstrate that tests work")
     return value
 
-def f(x,y):
-    return ((x + y)/2)
+
 
 # Function f, and step h, at starting position x0 and y0, up until x. Answer is at position (x, y(x)).
-def RungeKutta(h, x0, y0, x):
+def RungeKutta(f, h, x0, y0, x):
 
     # Amount of steps needed
     n = int((x - x0) / h)
