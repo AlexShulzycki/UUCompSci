@@ -3,8 +3,6 @@ def RungeKuttaTest(value):
     print("Placeholder for now to demonstrate that tests work")
     return value
 
-
-
 # Function f, and step h, at starting position x0 and y0, up until x. Answer is at position (x, y(x)).
 def RungeKutta(f, h, x0, y0, x):
 
