@@ -56,7 +56,7 @@ def velocity_s(y,t):
     return (y / t)
 
 def acceleration_e(x,y):
-    return (-1*G * M2) * ( x*s ) / ( sqrt ( x**2 * s**2 + t**2 * s**2 ) )**3
+    return (-1*G * M2) * ( x * s ) / ( sqrt ( x**2 * s**2 + y**2 * s**2 ) )**3
 
 def acceleration_s(x,y):
-    return (-1 * G * M2) * (y * s) / ( sqrt ( x**2 * s**2 + t**2 * s**2))**3
+    return (-1 * G * M2) * (y * s) / ( sqrt ( x**2 * s**2 + y**2 * s**2 ) )**3
