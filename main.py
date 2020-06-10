@@ -23,6 +23,9 @@ s = 1 + mEarth / mSun
 # velocities of sun are -p * Vx and -p * Vy, with p being a constant we will calculate
 # same goes for accelerations in x and y direction, thus we only need the velocities of earth in x and y direction
 # aka earths change in position per time period
+#
+# at x0, Vx = 0 and Vy = max
+# at a quarter of the orbit, Vx = max and Vy = 0
 
 def velocityEarth_x(x,t):
     return (x / t)
