@@ -1,6 +1,5 @@
 import numpy as np
 
-
 class LargeBody:
     mass = 0
     position = []
@@ -14,9 +13,21 @@ class LargeBody:
 # Constants
 G = 6.674083131313131313 * 10 ** (-11)
 
+
 mEarth = 5.972 * 10 ** 24  # kg
 mSun = 1.989 * 10 ** 30  # kg
 distance = 151.87 * 10 ** 9  # m
+
+# Fg = G * M1 * M2 / r^2
+Fg = G * mEarth * mSun / distance**2 # m kg s^-2
+
+# F = m*a
+# a_earth = F/mEarth
+# a_sun = F/mSun
+
+aEarth =  Fg / mEarth
+aSun = Fg / mSun
+
 
 # center of mass when both masses are on the x-axis
 barycenter = (mSun * distance) / (mEarth + mSun)
@@ -45,14 +56,13 @@ def simulate(body1, body2, steps):
 # same goes for accelerations in x and y direction, thus we only need the velocities of earth in x and y direction
 # aka earths change in position per time period
 #
-# at x0, Vx = 0 and Vy = max
+# at x0, Vx = 0 and Vy = max, & acceleration in x direction = - gravitational force from sun on earth
 # at a quarter of the orbit, Vx = max and Vy = 0
 
-def velocityEarth_x(x, t):
+def velocityEarth_x(t, x):
     return (x / t)
 
-
-def velocityEarth_y(y, t):
+def velocityEarth_y(t, y):
     return (y / t)
 
 
