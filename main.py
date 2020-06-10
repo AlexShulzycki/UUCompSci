@@ -1,5 +1,8 @@
 import numpy as np
 
+import RungeKutta
+
+
 class LargeBody:
     mass = 0
     position = []
@@ -39,20 +42,25 @@ s = 1 + mEarth / mSun
 Earth = LargeBody(mEarth, [x0_earth, 0], [v0_earth, 0]) # Position (distance, x) going v0 in the y direction
 Sun = LargeBody(mSun, [x0_sun, 0], [0,0]) # The sun sitting in the middle, not doing anything
 
-massratio = 1 + body1.mass / body2.mass
-gmass = -G * body2.mass
-bottom = (body2.position[0] ** 2 * massratio ** 2 + body2.position[1] ** 2 * massratio ** 2) ** 1.5
 
-def accelerationFunctionX(body1, body2):
-
-    resultx = gmass * body2.position[0] * massratio
+def accelerationFunctionX(x, y):
+    gmass = -G * Earth.mass
+    massratio = 1 + Sun.mass / Earth.mass
+    bottom = (x ** 2 * massratio ** 2 + y ** 2 * massratio ** 2) ** 1.5
+    resultx = gmass * x * massratio
     return resultx / bottom
 
-def accelerationFunctionY(body1, body2):
-    resulty = gmass * body2.position[1] * massratio
-    return resulty / bottom
+def accelerationFunctionY(x, y):
+    gmass = -G * Earth.mass
+    massratio = 1 + Sun.mass / Earth.mass
+    bottom = (x ** 2 * massratio ** 2 + y ** 2 * massratio ** 2) ** 1.5
+    resultx = gmass * y * massratio
+    return resultx / bottom
 
+def integrate():
+    RungeKutta.RungeKutta(accelerationFunctionX, 1, 0, 1000, Earth.position[1], Earth.position[0])
 
+integrate()
 
 
 # velocities of earth with respect to the barycenter = Vx and Vy
@@ -62,21 +70,6 @@ def accelerationFunctionY(body1, body2):
 #
 # at x0, Vx = 0 and Vy = max, & acceleration in x direction = - gravitational force from sun on earth
 # at a quarter of the orbit, Vx = max and Vy = 0
-
-def velocityEarth_x(t, x):
-    return (x / t)
-
-def velocityEarth_y(t, y):
-    return (y / t)
-
-
-def accelerationEarth_x(x, y):
-    return (-1 * G * mSun) * (x * s) / (np.sqrt(x ** 2 * s ** 2 + y ** 2 * s ** 2)) ** 3
-
-
-def accelerationEarth_y(x, y):
-    return (-1 * G * mSun) * (y * s) / (np.sqrt(x ** 2 * s ** 2 + y ** 2 * s ** 2)) ** 3
-
 
 print("The mass of the Earth is %fkg, while the mass of the sun is %fkg" % (mEarth, mSun))
 
