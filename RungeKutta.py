@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 # Function f, and step h, at starting position x0 and y0, up until x. Answer is at position (x, y(x)).
 def RungeKutta(functions, h, t0, y0, x):
 
-
     # Amount of steps needed
     n = int((x - t0) / h)
 
@@ -35,3 +34,7 @@ def RungeKutta(functions, h, t0, y0, x):
         results.append(y0)
 
     return results
+
+
+
+

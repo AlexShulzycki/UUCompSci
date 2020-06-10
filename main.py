@@ -45,20 +45,21 @@ Sun = LargeBody(mSun, [x0_sun, 0], [0,0]) # The sun sitting in the middle, not d
 
 def accelerationFunctionX(x, y):
     gmass = -G * Earth.mass
-    massratio = 1 + Sun.mass / Earth.mass
+    massratio = 1 + Earth.mass / Sun.mass
     bottom = (x ** 2 * massratio ** 2 + y ** 2 * massratio ** 2) ** 1.5
     resultx = gmass * x * massratio
     return resultx / bottom
 
 def accelerationFunctionY(x, y):
     gmass = -G * Earth.mass
-    massratio = 1 + Sun.mass / Earth.mass
+    massratio = 1 + Earth.mass / Sun.mass
     bottom = (x ** 2 * massratio ** 2 + y ** 2 * massratio ** 2) ** 1.5
     resultx = gmass * y * massratio
     return resultx / bottom
 
+#functions = np.array(accelerationFunctionX, )
 def integrate():
-    RungeKutta.RungeKutta(accelerationFunctionX, 1, 0, 1000, Earth.position[1], Earth.position[0])
+    RungeKutta.RungeKutta([accelerationFunctionX], 100, 0.1, Earth.position[1], 100000)
 
 integrate()
 
