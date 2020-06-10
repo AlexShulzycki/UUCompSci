@@ -46,14 +46,14 @@ def calculateAcceleration(body1, body2):
     # Calculate r squared for calculations
     r2 = r[0] ** 2 + r[1] ** 2
     # Fg = G * M1 * M2 / r^2
-    Fg = G * body1.mass * body2.mass / r2  # m kg s^-2
+    Fg = G * body1.mass * body2.mass / r2**1.5  # m kg s^-2
     # From Newton, F/m = acceleration - we do this for each body
     # Fg/mass * cos (which is x component of displacement vector, divided by magnitude)
     # Fg/mass * sin is for the y component
     body1.acceleration[0] = Fg / body1.mass * (r[0]/np.sqrt(r2))
     body1.acceleration[1] = Fg / body1.mass * (r[1]/np.sqrt(r2))
-    body2.acceleration[0] = Fg / body2.mass * (r[0] / np.sqrt(r2))
-    body2.acceleration[1] = Fg / body2.mass * (r[1] / np.sqrt(r2))
+    body2.acceleration[0] = Fg / body2.mass * (-r[0] / np.sqrt(r2))
+    body2.acceleration[1] = Fg / body2.mass * (-r[1] / np.sqrt(r2))
 
 
 

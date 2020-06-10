@@ -32,6 +32,6 @@ def RungeKutta(functions, h, t0, y0, x):
         plt.plot(values_array[:,0], values_array[:,1])
         plt.show()
 
-        results.append(t0)
+        results.append(y0)
 
     return results

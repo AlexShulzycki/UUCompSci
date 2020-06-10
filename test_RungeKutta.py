@@ -2,7 +2,6 @@ from unittest import TestCase
 import numpy
 import RungeKutta
 
-print(RungeKutta.RungeKutta(functions, 0.1, 1, 0, 5)[0])
 # You can hit the green arrows to run individual tests,
 # or press the arrow next to the class declaration to run all of them
 class Test(TestCase):
@@ -17,5 +16,6 @@ class Test(TestCase):
         functions = [f]
 
         assert str(RungeKutta.RungeKutta(functions, 0.1, 1, 0, 5)[0])[0:6] == "2.1526"
+        print(RungeKutta.RungeKutta(functions, 0.1, 1, 0, 5))
         assert str(RungeKutta.RungeKutta(functions, 0.1, 0, 1, 0.1)[0])[0:6] == "0.9655"
         assert str(RungeKutta.RungeKutta(functions, 0.1, 0, 1, 0.2)[0])[0:6] == "0.9377"
