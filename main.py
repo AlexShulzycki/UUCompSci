@@ -49,8 +49,8 @@ def calculateAcceleration(body1, body2):
     # Fg/mass * sin is for the y component
     body1.acceleration[0] = Fg / body1.mass * (r[0]/np.sqrt(r2))
     body1.acceleration[1] = Fg / body1.mass * (r[1]/np.sqrt(r2))
-    body2.acceleration[0] = Fg / body2.mass * (r[0] / np.sqrt(r2))
-    body2.acceleration[1] = Fg / body2.mass * (r[1] / np.sqrt(r2))
+    body2.acceleration[0] = Fg / body2.mass * (-r[0] / np.sqrt(r2))
+    body2.acceleration[1] = Fg / body2.mass * (-r[1] / np.sqrt(r2))
 
 
 # velocities of earth with respect to the barycenter = Vx and Vy
