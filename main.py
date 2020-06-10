@@ -18,8 +18,7 @@ mEarth = 5.972 * 10 ** 24  # kg
 mSun = 1.989 * 10 ** 30  # kg
 distance = 151.87 * 10 ** 9  # m
 
-# Fg = G * M1 * M2 / r^2
-Fg = G * mEarth * mSun / distance**2 # m kg s^-2
+
 
 # F = m*a
 # a_earth = F/mEarth
@@ -46,8 +45,12 @@ Earth = LargeBody(mEarth, [x0_earth, 0], [v0_earth, 0]) # Position (distance, x)
 Sun = LargeBody(mSun, [x0_sun, 0], [0,0]) # The sun sitting in the middle, not doing anything
 
 def simulate(body1, body2, steps):
-    # Calculate distance r squared
-    r2 = [body1.position[0] - body2.position[0], body1.position[1] - body2.position[1]]
+    # Calculate distance vector r
+    r = [body1.position[0] - body2.position[0], body1.position[1] - body2.position[1]]
+    # Calculate r squared for calculations
+    r2 = r[0] ** 2 + r[1] ** 2
+    # Fg = G * M1 * M2 / r^2
+    Fg = G * body1.mass * body2.mass / r2  # m kg s^-2
 
 
 
