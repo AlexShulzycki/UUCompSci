@@ -39,7 +39,7 @@ s = 1 + mEarth / mSun
 
 # Declaring the Earth and Sun objects
 
-Earth = LargeBody(mEarth, [x0_earth, 0], [v0_earth, 0]) # Position (distance, x) going v0 in the y direction
+Earth = LargeBody(mEarth, [x0_earth, 0], [0, v0_earth]) # Position (distance, x) going v0 in the y direction
 Sun = LargeBody(mSun, [x0_sun, 0], [0,0]) # The sun sitting in the middle, not doing anything
 
 
@@ -57,9 +57,29 @@ def accelerationFunctionY(x, y):
     resultx = gmass * y * massratio
     return resultx / bottom
 
-#functions = np.array(accelerationFunctionX, )
+
+
+
+
+
+
+def fct(x, y):
+    G = 4. * np.pi ** 2
+
+    r = np.sqrt((y[0] * (1. + mEarth / mSun)) ** 2 + (y[2] * (1. + mEarth / mSun)) ** 2.)
+
+    return [y[1], - G * mSun * y[0] * (1 + mEarth / mSun) / r ** 3,
+            y[3], - G * mSun * y[2] * (1 + mEarth / mSun) / r ** 3]  # dy/dx = v, dv/dx = F
+
+x = x0_earth
+vx = 0
+y = 0
+vy = v0_earth
+
+y = [x, vx, y, vy]
+
 def integrate():
-    RungeKutta.RungeKutta([accelerationFunctionX], 100, 0.1, Earth.position[1], 100000)
+    RungeKutta.RungeKutta(fct, 100, 0, y, 100000)
 
 integrate()
 
