@@ -31,13 +31,12 @@ s = 1 + mEarth / mSun
 
 # Declaring the Earth and Sun objects
 
-Earth = LargeBody(mEarth, [0, distance], [v0_earth, 0]) # Position (0, distance) going v0 in the x direction
-Sun = LargeBody(mSun, [0,0], [0,0]) # The sun sitting in the middle, not doing anything
+Earth = LargeBody(mEarth, [x0_earth, 0], [v0_earth, 0]) # Position (distance, x) going v0 in the y direction
+Sun = LargeBody(mSun, [x0_sun, 0], [0,0]) # The sun sitting in the middle, not doing anything
 
 def simulate(body1, body2, steps):
-    for i in range(0, steps):
-        # Calculate distance r squared
-        r2 = [body1.position[0] - body2.position[0], body1.position[1] - body2.position[1]]
+    # Calculate distance r squared
+    r2 = [body1.position[0] - body2.position[0], body1.position[1] - body2.position[1]]
 
 
 
