@@ -66,20 +66,20 @@ def accelerationFunctionY(x, y):
 def fct(x, y):
     G = 4. * np.pi ** 2
 
-    r = np.sqrt((y[0] * (1. + mEarth / mSun)) ** 2 + (y[2] * (1. + mEarth / mSun)) ** 2.)
+    r = np.sqrt((y[0] * (1. + r_mEarth / r_mSun)) ** 2 + (y[2] * (1. + r_mEarth / r_mSun)) ** 2.)
 
-    return [y[1], - G * mSun * y[0] * (1 + mEarth / mSun) / r ** 3,
-            y[3], - G * mSun * y[2] * (1 + mEarth / mSun) / r ** 3]  # dy/dx = v, dv/dx = F
+    return np.array([y[1], - G * r_mSun * y[0] * (1 + r_mEarth / r_mSun) / r ** 3,
+            y[3], - G * r_mSun * y[2] * (1 + r_mEarth / r_mSun) / r ** 3])  # dy/dx = v, dv/dx = F
 
 x = x0_earth
 vx = 0
 y = 0
 vy = v0_earth
 
-y = [x, vx, y, vy]
+y = np.array([x, vx, y, vy])
 
 def integrate():
-    RungeKutta.RungeKutta(fct, 100, 0, y, 100000)
+    RungeKutta.RungeKutta(fct, 0.01, 0, y, 2)
 
 integrate()
 
