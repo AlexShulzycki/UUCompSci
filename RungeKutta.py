@@ -35,5 +35,3 @@ def RungeKutta(functions, h, x0, y0, x):
         results.append(y0)
 
     return results
-
-
