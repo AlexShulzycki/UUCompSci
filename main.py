@@ -17,7 +17,10 @@ G = 6.674083131313131313 * 10 ** (-11)
 
 mEarth = 5.972 * 10 ** 24  # kg
 mSun = 1.989 * 10 ** 30  # kg
-distance = 151.87 * 10 ** 9  # m
+#reduced masses
+r_mEarth = mEarth / (mEarth + mSun)
+r_mSun = mSun / (mEarth + mSun)
+distance = 1.01518824626  # AU
 
 
 # center of mass when both masses are on the x-axis
@@ -27,7 +30,7 @@ print("Barycenter: ", barycenter)
 x0_sun = barycenter - distance
 x0_earth = barycenter
 
-v0_earth = 29.78  # km/s
+v0_earth = 6.2777771  # AU/yr
 
 s = 1 + mEarth / mSun
 
@@ -51,6 +54,7 @@ def calculateAcceleration(body1, body2):
     body1.acceleration[1] = Fg / body1.mass * (r[1]/np.sqrt(r2))
     body2.acceleration[0] = Fg / body2.mass * (r[0] / np.sqrt(r2))
     body2.acceleration[1] = Fg / body2.mass * (r[1] / np.sqrt(r2))
+
 
 
 # velocities of earth with respect to the barycenter = Vx and Vy
