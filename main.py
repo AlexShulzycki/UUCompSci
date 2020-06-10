@@ -4,6 +4,7 @@ class LargeBody:
     mass = 0
     position = []
     velocityVector = []
+    acceleration = [0,0]
 
     def __init__(self, _mass, _position, _velocityVector):
         self.mass = _mass
@@ -19,18 +20,9 @@ mSun = 1.989 * 10 ** 30  # kg
 distance = 151.87 * 10 ** 9  # m
 
 
-
-# F = m*a
-# a_earth = F/mEarth
-# a_sun = F/mSun
-
-aEarth =  Fg / mEarth
-aSun = Fg / mSun
-
-
 # center of mass when both masses are on the x-axis
 barycenter = (mSun * distance) / (mEarth + mSun)
-print(barycenter)
+print("Barycenter: ", barycenter)
 
 x0_sun = barycenter - distance
 x0_earth = barycenter
@@ -44,14 +36,21 @@ s = 1 + mEarth / mSun
 Earth = LargeBody(mEarth, [x0_earth, 0], [v0_earth, 0]) # Position (distance, x) going v0 in the y direction
 Sun = LargeBody(mSun, [x0_sun, 0], [0,0]) # The sun sitting in the middle, not doing anything
 
-def simulate(body1, body2, steps):
+
+def calculateAcceleration(body1, body2):
     # Calculate distance vector r
     r = [body1.position[0] - body2.position[0], body1.position[1] - body2.position[1]]
     # Calculate r squared for calculations
     r2 = r[0] ** 2 + r[1] ** 2
     # Fg = G * M1 * M2 / r^2
     Fg = G * body1.mass * body2.mass / r2  # m kg s^-2
-
+    # From Newton, F/m = acceleration - we do this for each body
+    # Fg/mass * cos (which is x component of displacement vector, divided by magnitude)
+    # Fg/mass * sin is for the y component
+    body1.acceleration[0] = Fg / body1.mass * (r[0]/np.sqrt(r2))
+    body1.acceleration[1] = Fg / body1.mass * (r[1]/np.sqrt(r2))
+    body2.acceleration[0] = Fg / body2.mass * (r[0] / np.sqrt(r2))
+    body2.acceleration[1] = Fg / body2.mass * (r[1] / np.sqrt(r2))
 
 
 # velocities of earth with respect to the barycenter = Vx and Vy
