@@ -36,16 +36,21 @@ s = 1 + mEarth / mSun
 Earth = LargeBody(mEarth, [x0_earth, 0], [v0_earth, 0]) # Position (distance, x) going v0 in the y direction
 Sun = LargeBody(mSun, [x0_sun, 0], [0,0]) # The sun sitting in the middle, not doing anything
 
-massratio = 1 + body1.mass / body2.mass
-gmass = -G * body2.mass
-bottom = (body2.position[0] ** 2 * massratio ** 2 + body2.position[1] ** 2 * massratio ** 2) ** 1.5
+
+
+
 
 def accelerationFunctionX(body1, body2):
-
+    gmass = -G * body2.mass
+    massratio = 1 + body1.mass / body2.mass
+    bottom = (body2.position[0] ** 2 * massratio ** 2 + body2.position[1] ** 2 * massratio ** 2) ** 1.5
     resultx = gmass * body2.position[0] * massratio
     return resultx / bottom
 
 def accelerationFunctionY(body1, body2):
+    gmass = -G * body2.mass
+    massratio = 1 + body1.mass / body2.mass
+    bottom = (body2.position[0] ** 2 * massratio ** 2 + body2.position[1] ** 2 * massratio ** 2) ** 1.5
     resulty = gmass * body2.position[1] * massratio
     return resulty / bottom
 
