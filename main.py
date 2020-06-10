@@ -13,18 +13,27 @@ print(barycenter)
 x0_sun = barycenter - distance
 x0_earth = barycenter
 
+v0_earth = 29.78 # km/s
+
+
+
 s = 1 + mEarth / mSun
 
-def velocity_e(x,t):
+# velocities of earth with respect to the barycenter = Vx and Vy
+# velocities of sun are -p * Vx and -p * Vy, with p being a constant we will calculate
+# same goes for accelerations in x and y direction, thus we only need the velocities of earth in x and y direction
+# aka earths change in position per time period
+
+def velocityEarth_x(x,t):
     return (x / t)
 
-def velocity_s(y,t):
+def velocityEarth_y(y,t):
     return (y / t)
 
-def acceleration_e(x,y):
+def accelerationEarth_x(x,y):
     return (-1 * G * mSun) * (x * s) / (np.sqrt(x ** 2 * s ** 2 + y ** 2 * s ** 2)) ** 3
 
-def acceleration_s(x,y):
+def accelerationEarth_y(x,y):
     return (-1 * G * mSun) * (y * s) / (np.sqrt(x ** 2 * s ** 2 + y ** 2 * s ** 2)) ** 3
 
 print("The mass of the Earth is %fkg, while the mass of the sun is %fkg" % (mEarth, mSun))
