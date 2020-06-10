@@ -36,21 +36,19 @@ s = 1 + mEarth / mSun
 Earth = LargeBody(mEarth, [x0_earth, 0], [v0_earth, 0]) # Position (distance, x) going v0 in the y direction
 Sun = LargeBody(mSun, [x0_sun, 0], [0,0]) # The sun sitting in the middle, not doing anything
 
+massratio = 1 + body1.mass / body2.mass
+gmass = -G * body2.mass
+bottom = (body2.position[0] ** 2 * massratio ** 2 + body2.position[1] ** 2 * massratio ** 2) ** 1.5
 
-def calculateAcceleration(body1, body2):
-    # Calculate distance vector r
-    r = [body1.position[0] - body2.position[0], body1.position[1] - body2.position[1]]
-    # Calculate r squared for calculations
-    r2 = r[0] ** 2 + r[1] ** 2
-    # Fg = G * M1 * M2 / r^2
-    Fg = G * body1.mass * body2.mass / r2**1.5  # m kg s^-2
-    # From Newton, F/m = acceleration - we do this for each body
-    # Fg/mass * cos (which is x component of displacement vector, divided by magnitude)
-    # Fg/mass * sin is for the y component
-    body1.acceleration[0] = Fg / body1.mass * (r[0]/np.sqrt(r2))
-    body1.acceleration[1] = Fg / body1.mass * (r[1]/np.sqrt(r2))
-    body2.acceleration[0] = Fg / body2.mass * (-r[0] / np.sqrt(r2))
-    body2.acceleration[1] = Fg / body2.mass * (-r[1] / np.sqrt(r2))
+def accelerationFunctionX(body1, body2):
+
+    resultx = gmass * body2.position[0] * massratio
+    return resultx / bottom
+
+def accelerationFunctionY(body1, body2):
+    resulty = gmass * body2.position[1] * massratio
+    return resulty / bottom
+
 
 
 # velocities of earth with respect to the barycenter = Vx and Vy
