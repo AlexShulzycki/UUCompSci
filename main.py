@@ -29,6 +29,9 @@ if system == "1":
     dt = 0.01
     t_end = 2
 
+    print("The mass of the %s is %gkg, while the mass of the %s is %gkg. The %s is initially traveling at %gAU per "
+          "year." % (name1, M1, name2, M2, name1, v0))
+
 
 
 elif system == "2":
@@ -51,8 +54,8 @@ elif system == "2":
     t_end = 6000000
 
 
-print("The mass of the %s is %gkg, while the mass of the %s is %gkg. The %s is initially traveling at %fAU per "
-      "year." % (name1, M1, name2, M2, name1, v0))
+    print("The mass of the %s is %gkg, while the mass of the %s is %gkg. The %s is initially traveling at %g meter per "
+          "second." % (name1, M1, name2, M2, name1, v0))
 
 
 def fct(x, y):
