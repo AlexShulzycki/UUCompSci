@@ -19,8 +19,6 @@ if system == "1":
     M2 = mSun / (mEarth + mSun) # Reduced mass
 
     G = 4. * np.pi ** 2  # Gravitational Constant G, for use with Astronomical Units.
-    #r_m1 = mEarth / (mEarth + mSun)
-    #r_m2 = mSun / (mEarth + mSun)
     distance = 1.01518824626  # AU
     r_ratio = 1. + M1 / M2  # Useful value which will be used in the gravity equations
     v0 = 6.2777771  # Initial velocity of Earth, in AU/yr
@@ -40,22 +38,21 @@ elif system == "2":
     M1 = 7.347 * 10 ** 22 # kg
     M2 = 5.972 * 10 ** 24  # kg
 
-    G = 6.67408 * 10**(-12)
-    #r_m1 = M1 # extra reduction not needed, definition to make it work in the functions later in the code
-    #r_m2 = M2 # extra reduction not needed, definition to make it work in the functions later in the code
-    distance = 384400 #km
+    G = 6.67259 * 10**(-11) # m^3 s^-2 kg^-1
+    distance = 384400000 #m
     r_ratio = 1. + M1 / M2
-    v0 = 3683.  # Initial velocity of Moon, in km/hr
-    barycenter = M1 * distance / (M2 + M1)  # Center of mass when both masses are on the x-axis
-    x0_2 = -1 * barycenter  # Initial x position of Earth
-    x0_1 = distance - barycenter  # Initial x position of the moon
+    v0 = 1022.  # Initial velocity of Moon, in m/s
+    barycenter = M2 * distance / (M2 + M1)  # Center of mass when both masses are on the x-axis
+    print(barycenter)
+    x0_2 = barycenter - distance  # Initial x position of Earth
+    x0_1 = barycenter  # Initial x position of the moon
 
-    dt = 0.1
-    t_end = 100
+    dt = 3600
+    t_end = 6000000
 
 
-print("The mass of the %s is %fkg, while the mass of the %s is %fkg. The %s initially traveling at %fAU per "
-      "year." % (name1, M1, name2, mSun, name1, v0))
+print("The mass of the %s is %gkg, while the mass of the %s is %gkg. The %s is initially traveling at %fAU per "
+      "year." % (name1, M1, name2, M2, name1, v0))
 
 
 def fct(x, y):
