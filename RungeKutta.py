@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
 
 
 def RungeKutta(f, h, x0, y0, x):
@@ -46,12 +45,4 @@ def RungeKutta(f, h, x0, y0, x):
         # Increment x for next iteration
         x0 += h
 
-    # Plotting the results
-    plt.plot(values[:, 0], values[:, 1])  # Plot of the x component of Earth's velocity
-    plt.show()
-    plt.plot(values[:, 0], values[:, 3])  # Plot of the y component of Earth's velocity
-    plt.show()
-    plt.plot(values[:, 1], values[:, 3])  # Plot of Earth's position
-    plt.show()
-
-    return y0
+    return values

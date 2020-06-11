@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 import RungeKutta
 
 # Constants
@@ -51,4 +52,12 @@ vy = v0_earth  # Initial y velocity of Earth
 y = np.array([x, vx, y, vy])
 
 # Runge-Kutta algorithm used with the initial conditions, which plots the results.
-RungeKutta.RungeKutta(fct, 0.01, 0, y, 2)
+values = RungeKutta.RungeKutta(fct, 0.01, 0, y, 1)
+
+# Plotting the results
+plt.plot(values[:, 0], values[:, 1])  # Plot of the x component of Earth's velocity
+plt.show()
+plt.plot(values[:, 0], values[:, 3])  # Plot of the y component of Earth's velocity
+plt.show()
+plt.plot(values[:, 1], values[:, 3])  # Plot of Earth's position
+plt.show()
