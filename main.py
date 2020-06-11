@@ -33,7 +33,7 @@ def findPeriod(values, step):
     t0 = values[0]
     index = 0
     precision = 3
-    if units == "meter": precision = 3
+    if units == "meter": precision = 2
 
     # Iterate over each value, skipping the first one
     for i in range(1, len(values)):
