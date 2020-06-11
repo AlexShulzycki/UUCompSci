@@ -105,8 +105,8 @@ while system != "3":
         x0_2 = barycenter - distance  # Initial x position of Earth
         x0_1 = barycenter  # Initial x position of the moon
 
-        dt = 3600
-        t_end = 6000000
+        dt = 86400 # one day
+        t_end = 4000000 #
 
         print(
             "The mass of the %s is %gkg, while the mass of the %s is %gkg. The %s is initially traveling at %g meters per"
@@ -143,8 +143,12 @@ while system != "3":
     plt.ylabel("Y Component of Velocity")
     plt.show()
     plt.plot(values[:, 1], values[:, 3])  # Plot of position
-    plt.xlabel("X")
-    plt.ylabel("Y")
+    if system == '1':
+        plt.xlabel("X (AU)")
+        plt.ylabel("Y (AU)")
+    elif system == '2':
+        plt.xlabel("X (m)")
+        plt.ylabel("Y (m)")
     plt.title("Position")
     plt.show()
 
