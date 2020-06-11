@@ -7,7 +7,7 @@ import RungeKutta
 
 mEarth = 5.972 * 10 ** 24  # kg
 mSun = 1.989 * 10 ** 30  # kg
-mMoon = 7.347 * 10 ** 22 # kg
+mMoon = 7.347 * 10 ** 22  # kg
 
 
 def fct(x, y):
@@ -24,6 +24,8 @@ def fct(x, y):
                      - G * M2 * y[0] * r_ratio / r ** 3,  # X component of velocity dx/dt
                      y[3],  # Initial y of the body
                      - G * M2 * y[2] * r_ratio / r ** 3])  # Y component of velocity dx/dt
+
+
 def findPeriod(values, step):
     """
     Find the x and y values at time 0, and then look for the next identical entry and compare time
@@ -38,16 +40,18 @@ def findPeriod(values, step):
     # Iterate over each value, skipping the first one
     for i in range(1, len(values)):
         # We take the substring in order to get the closes values and avoid float precision errors
-        if str(values[i, 1])[0:precision] == str(t0[1])[0:precision] and str(values[i, 3])[0:precision] == str(t0[3])[0:precision]:
+        if str(values[i, 1])[0:precision] == str(t0[1])[0:precision] and str(values[i, 3])[0:precision] == str(t0[3])[
+                                                                                                           0:precision]:
             index = i
             break
 
     # Return length of period in years
 
     if units == "meter":
-        return index * step / (365*24*60*60)
+        return index * step / (365 * 24 * 60 * 60)
     else:
         return index * step
+
 
 # User input loop
 system = ""
@@ -66,15 +70,15 @@ while system != "3":
         units = "au"
         # Constants earth-sun system
         name1 = 'Earth'
-        name2 = 'sun'
-        M1 = mEarth / (mEarth + mSun) # Reduced mass
-        M2 = mSun / (mEarth + mSun) # Reduced mass
+        name2 = 'Sun'
+        M1 = mEarth / (mEarth + mSun)  # Reduced mass
+        M2 = mSun / (mEarth + mSun)  # Reduced mass
 
         G = 4. * np.pi ** 2  # Gravitational Constant G, for use with Astronomical Units.
         distance = 1.01518824626  # AU
         r_ratio = 1. + M1 / M2  # Useful value which will be used in the gravity equations
         v0 = 6.2777771  # Initial velocity of Earth, in AU/yr
-        barycenter = M2 * distance # Center of mass when both masses are on the x-axis
+        barycenter = M2 * distance  # Center of mass when both masses are on the x-axis
         x0_2 = barycenter - distance  # Initial x position of the sun
         x0_1 = barycenter  # Initial x position of Earth
 
@@ -84,18 +88,16 @@ while system != "3":
         print("The mass of the %s is %gkg, while the mass of the %s is %gkg. The %s is initially traveling at %gAU per "
               "year." % (name1, M1, name2, M2, name1, v0))
 
-
-
     elif system == "2":
         units = "meter"
         # Constants earth-moon system
         name1 = 'Moon'
         name2 = 'Earth'
-        M1 = 7.347 * 10 ** 22 # kg
+        M1 = 7.347 * 10 ** 22  # kg
         M2 = 5.972 * 10 ** 24  # kg
 
-        G = 6.67259 * 10**(-11) # m^3 s^-2 kg^-1
-        distance = 384400000 #m
+        G = 6.67259 * 10 ** (-11)  # m^3 s^-2 kg^-1
+        distance = 384400000  # m
         r_ratio = 1. + M1 / M2
         v0 = 1022.  # Initial velocity of Moon, in m/s
         barycenter = M2 * distance / (M2 + M1)  # Center of mass when both masses are on the x-axis
@@ -106,9 +108,9 @@ while system != "3":
         dt = 3600
         t_end = 6000000
 
-
-        print("The mass of the %s is %gkg, while the mass of the %s is %gkg. The %s is initially traveling at %g meter per "
-              "second." % (name1, M1, name2, M2, name1, v0))
+        print(
+            "The mass of the %s is %gkg, while the mass of the %s is %gkg. The %s is initially traveling at %g meters per"
+            " second." % (name1, M1, name2, M2, name1, v0))
     elif system == "3":
         break
     else:
@@ -131,17 +133,24 @@ while system != "3":
 
     # Plotting the results
     plt.plot(values[:, 0], values[:, 1])  # Plot of the x component of velocity
+    plt.title("X Component of Velocity")
+    plt.xlabel("X Position")
+    plt.ylabel("X Velocity")
     plt.show()
     plt.plot(values[:, 0], values[:, 3])  # Plot of the y component of velocity
+    plt.title("Y Component of Velocity")
+    plt.xlabel("X Position")
+    plt.ylabel("Y Component of Velocity")
     plt.show()
     plt.plot(values[:, 1], values[:, 3])  # Plot of position
+    plt.xlabel("X")
+    plt.ylabel("Y")
+    plt.title("Position")
     plt.show()
 
-    print("The orbital period of the %s - %s system is %f years." % (name1, name2, findPeriod(values, dt)))
+    if(units == "meter"):
+        print("The units for the position and velocities are in meters, and meters per second.")
+    else:
+        print("The units for position and velocities are in astronomical units, and astronomical units per year.")
 
-
-
-
-
-
-
+    print("The orbital period of the %s - %s system is %f years.\n\n" % (name1, name2, findPeriod(values, dt)))
