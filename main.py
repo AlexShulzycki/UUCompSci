@@ -86,7 +86,7 @@ while system != "3":
         t_end = 2
 
         print("The mass of the %s is %gkg, while the mass of the %s is %gkg. The %s is initially traveling at %gAU per "
-              "year." % (name1, M1, name2, M2, name1, v0))
+              "year." % (name1, mEarth, name2, mSun, name1, v0))
 
     elif system == "2":
         units = "meter"
