@@ -30,18 +30,18 @@ def findPeriod(values, step):
     """
     Find the x and y values at time 0, and then look for the next identical entry and compare time
     :param values: The values returned from the Runge-Kutta algorithm
-    :param step: The step used in the Runge-Kutta algorithm, in AU
+    :param step: The step used in the Runge-Kutta algorithm, in either AU or meters.
     """
-    t0 = values[0]
+    t0x = values[0,1]
+    t0y = values[0,3]
     index = 0
-    precision = 3
-    if units == "meter": precision = 2
+    precision = 0.003
+    if units == "meter": precision = 1000000
 
     # Iterate over each value, skipping the first one
     for i in range(1, len(values)):
-        # We take the substring in order to get the closes values and avoid float precision errors
-        if str(values[i, 1])[0:precision] == str(t0[1])[0:precision] and str(values[i, 3])[0:precision] == str(t0[3])[
-                                                                                                           0:precision]:
+        # We take the absolute value of the difference to calculate precision
+        if abs(values[i, 1] - t0x) < precision and abs(values[i, 3] == t0y) < precision:
             index = i
             break
 
@@ -105,7 +105,7 @@ while system != "3":
         x0_2 = barycenter - distance  # Initial x position of Earth
         x0_1 = barycenter  # Initial x position of the moon
 
-        dt = 86400 # one day
+        dt = 40000 # one day
         t_end = 4000000 #
 
         print(
